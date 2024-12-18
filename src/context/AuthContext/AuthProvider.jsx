@@ -10,7 +10,8 @@ import {
     updateProfile
 } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
-  
+import axios from 'axios';
+
 const googleProvider = new GoogleAuthProvider();
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
@@ -55,7 +56,34 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
-            setLoading(false)
+
+            // console.log('current user', currentUser?.email)
+            if (currentUser?.email) {
+                const user = { email: currentUser.email };
+                axios.post('https://job-portal-server-liart.vercel.app/jwt', user, {
+                    withCredentials: true
+                })
+                    .then(res => {
+                        console.log("Login Token", res.data)
+
+                        setLoading(false)
+
+                    })
+            }
+            else {
+                axios.post('https://job-portal-server-liart.vercel.app/logout', {}, {
+                    withCredentials: true
+                })
+                    .then(res => {
+                        console.log('LogOut', res.data)
+
+                        setLoading(false)
+                    })
+            }
+
+
+
+
         })
         return () => {
             unsubscribe();

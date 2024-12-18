@@ -4,11 +4,16 @@ import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState('');
-    const { SignInUser,handleGoogle } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { SignInUser, handleGoogle } = useContext(AuthContext);
+    const from = location.state || '/';
 
 
     const handleLogin = e => {
@@ -21,24 +26,39 @@ const Login = () => {
         SignInUser(email, password)
             .then(res => {
                 console.log(res.user)
-                alert('user SuccessFully Login')
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your Successfully Login",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate(from)
             })
             .catch(error => {
                 console.log(error.message)
                 setError(error.message)
+
             })
     };
-    
+
     const handlwGooogleSignin = () => {
         handleGoogle()
-        .then(res => {
-            alert("SuccessFully Google SignIn")
-            console.log(res.user)
-        })
-        .catch(errro => {
-            console.log(errro.message)
-            setError(errro.message)
-        })
+            .then(res => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your Successfully Google Login",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                console.log(res.user)
+                navigate(from)
+            })
+            .catch(errro => {
+                console.log(errro.message)
+                setError(errro.message)
+            })
     };
     return (
         <div className="hero bg-base-200 min-h-screen">

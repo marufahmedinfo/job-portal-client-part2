@@ -1,8 +1,14 @@
-# React + Vite
+# JOb PORTAL
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Key Features
+- **Responsive Design :** Fully responsive across devices (mobile, tablet, and desktop).
+- **Authentication System :** 
+-  Email and Password Login/Registration with Firebase.
+-  Google Sign-In Support.
+-  Password Validation: Includes uppercase, lowercase, and minimum 6 characters.
+- **server API :** "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS".
+- **Dynamic Titles :** Each page has a unique title for better user experience and SEO.
+- **404 Page :** A custom "Not Found" page for invalid URLs.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Link
+**Explore** [https://job-portal-secure.netlify.app](https://job-portal-secure.netlify.app)
